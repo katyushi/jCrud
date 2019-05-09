@@ -5,12 +5,17 @@
  */
 package connection.forms;
 
+import connection.clientes.Cliente;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hugo lazzari
  */
 public class Crud extends javax.swing.JFrame {
 
+    Cliente cliente = new Cliente();
     /**
      * Creates new form Crud
      */
@@ -61,11 +66,18 @@ public class Crud extends javax.swing.JFrame {
 
         btnSalvar.setText("Salvar");
         btnSalvar.setToolTipText("Salvar");
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSalvar);
         btnSalvar.setBounds(420, 140, 63, 23);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btnCancelar);
         btnCancelar.setBounds(330, 140, 80, 23);
 
@@ -122,6 +134,31 @@ public class Crud extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+       salvarDados();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void salvarDados(){
+         if (validaCamposObrigatorios()){
+            JOptionPane.showMessageDialog(null, "preencha todos os campos antes de salvar os dados!");
+        }else{
+            try{
+                cliente.setNomeCompleto(jTextFieldNomeCompleto.getText());
+                cliente.setIdade(jTextFieldIdade.getText());
+                cliente.setCpf(jTextFieldCpf.getText());
+                cliente.setRg(jTextFieldRg.getText());
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, "erro ao salvar os dados: "+ e.toString());
+            }
+        }
+    }
+    private boolean validaCamposObrigatorios(){
+        return (jTextFieldNomeCompleto.getText().equals("")
+                || jTextFieldIdade.getText().equals("")
+                || jTextFieldCpf.getText().equals("")
+                || jTextFieldRg.getText().equals("")
+                );
+    }
     /**
      * @param args the command line arguments
      */
