@@ -1,2 +1,2 @@
 # jCrud
-um sistema com CRUD java e MySql
+um sistema tipo CRUD em java e MySql 8
