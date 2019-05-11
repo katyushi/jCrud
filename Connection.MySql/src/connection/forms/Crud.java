@@ -6,6 +6,7 @@
 package connection.forms;
 
 import connection.clientes.Cliente;
+import connection.mysql.ClienteDao.ClienteDao;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 public class Crud extends javax.swing.JFrame {
 
     Cliente cliente = new Cliente();
+    ClienteDao clienteDao = new ClienteDao();
     /**
      * Creates new form Crud
      */
@@ -147,10 +149,18 @@ public class Crud extends javax.swing.JFrame {
                 cliente.setIdade(jTextFieldIdade.getText());
                 cliente.setCpf(jTextFieldCpf.getText());
                 cliente.setRg(jTextFieldRg.getText());
+                clienteDao.criarRegitroNoBancoDeDados(cliente);
+                limparCampos();
             }catch(SQLException e){
                 JOptionPane.showMessageDialog(null, "erro ao salvar os dados: "+ e.toString());
             }
         }
+    }
+    private void limparCampos(){
+        jTextFieldNomeCompleto.setText("");
+        jTextFieldIdade.setText("");
+        jTextFieldCpf.setText("");
+        jTextFieldRg.setText("");
     }
     private boolean validaCamposObrigatorios(){
         return (jTextFieldNomeCompleto.getText().equals("")
