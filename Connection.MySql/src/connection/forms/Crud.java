@@ -161,6 +161,7 @@ public class Crud extends javax.swing.JFrame {
         jTextFieldIdade.setText("");
         jTextFieldCpf.setText("");
         jTextFieldRg.setText("");
+        jTextFieldNomeCompleto.requestFocus();
     }
     private boolean validaCamposObrigatorios(){
         return (jTextFieldNomeCompleto.getText().equals("")
